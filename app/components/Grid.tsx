@@ -25,7 +25,7 @@ export function Grid({ previousGuesses, currentGuess }: GridProps) {
                         {guess.map((note, indexn) => (
                             <li key={indexn}>
                                 <div className="guess-box w-24 h-24 border-2 border-black flex items-center justify-center">
-                                    <div className="text-2xl">{note}</div>
+                                    <div className="text-2xl text-black font-bold">{note}</div>
                                 </div>
                             </li>
                         ))}
