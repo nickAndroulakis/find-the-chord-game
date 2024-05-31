@@ -14,11 +14,23 @@ export default function Home() {
   const [currentGuess, setCurrentGuess] = useState<Guess>([]);
 
   function handleClick(note: string) {
-    play(note);
+    if (currentGuess.length < 4) {
+      play(note);
+      setCurrentGuess((prev) => [...prev, note]);
+      console.log("CurrentGuess after click: " + currentGuess);
+    }
+  }
 
-    setCurrentGuess((prev) => [...prev, note]);
-    console.log("CurrentGuess after click: " + currentGuess);
+  function play(note: string) {
+    const synth = new Tone.Synth().toDestination();
 
+    Tone.loaded().then(() => {
+      synth.triggerAttackRelease(`${note}`, 1);
+    });
+    console.log("Playing note: " + note);
+  }
+
+  function handleCheck() {
     if (currentGuess.length == 4) {
       //Pause to animate reveal of guess
       //Check if guess is correct
@@ -31,14 +43,8 @@ export default function Home() {
       setPreviousGuessses((prev) => [...prev, currentGuess]);
       setCurrentGuess([]);
     }
-
-    function play(note: string) {
-      const synth = new Tone.Synth().toDestination();
-
-      Tone.loaded().then(() => {
-        synth.triggerAttackRelease(`${note}`, 1);
-      });
-      console.log("Playing note: " + note);
+    else {
+      console.log("Guess is not complete");
     }
   }
 
@@ -46,7 +52,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-white">
       <h1 className="text-black text-2xl font-bold">Find the Chord</h1>
       <Grid previousGuesses={previousGuesses} currentGuess={currentGuess} />
-      <Keyboard handleClick={handleClick} />
+      <Keyboard handleClick={handleClick} handleCheck={handleCheck} />
     </main>
   );
 }
