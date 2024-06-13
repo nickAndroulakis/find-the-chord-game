@@ -65,15 +65,19 @@ export default function Home() {
           description: "Your guess was wrong.",
         });
       }
-      setPreviousGuessses((prev) => [...prev, currentGuess]);
-      setCurrentGuess([]);
-      setOctave(4);
-      if (previousGuesses.length == 4) {
+      if (previousGuesses.length == 3) {
         //END GAME
         console.log("Game Over");
         toast({
           description: "Game Over. You lose.",
         });
+        setPreviousGuessses((prev) => [...prev, currentGuess]);
+
+      }
+      else {
+      setPreviousGuessses((prev) => [...prev, currentGuess]);
+      setCurrentGuess([]);
+      setOctave(4);
       }
     }
     else {
@@ -94,7 +98,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-white">
       <h1 className="text-black text-2xl font-bold">Find the Chord</h1>
-      <Grid previousGuesses={previousGuesses} currentGuess={currentGuess} />
+      <Grid previousGuesses={previousGuesses} currentGuess={currentGuess} solution={solution} />
       <Keyboard handleClick={handleClick} handleCheck={handleCheck} handleDelete={handleDelete} />
     </main>
   );

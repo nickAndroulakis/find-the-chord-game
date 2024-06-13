@@ -1,12 +1,16 @@
+import { Cell } from "./Cell";
+
 type Guess = string[];
 
 type GridProps = {
     previousGuesses: Guess[];
     currentGuess: Guess;
+    solution: Guess;
 };
 
-export function Grid({ previousGuesses, currentGuess }: GridProps) {
+export function Grid({ previousGuesses, currentGuess, solution }: GridProps) {
 
+    console.log("Previous Guesses: " + previousGuesses);
     //Fill current guess with empty strings
     const filledCurrentGuess = currentGuess.concat(Array(4 - currentGuess.length).fill(""));
 
@@ -15,23 +19,40 @@ export function Grid({ previousGuesses, currentGuess }: GridProps) {
     const emptyGuesses = Array(emptyRows).fill(Array(4).fill("")) as Guess[];
 
     //Combine all guesses
-    const finalGuesses = previousGuesses.length === 4 ? previousGuesses : previousGuesses.concat([filledCurrentGuess]).concat(emptyGuesses);
+    const finalGuesses = [filledCurrentGuess].concat(emptyGuesses);
 
     return (
-        <ul className="p-12 guess-grid flex flex-col gap-4">
-            {finalGuesses.map((guess, index) => (
-                <li key={index}>
-                    <ul className="flex flex-row gap-4">
-                        {guess.map((note, indexn) => (
-                            <li key={indexn}>
-                                <div className="guess-box w-24 h-24 border-2 border-black flex items-center justify-center">
-                                    <div className="text-2xl text-black font-bold">{note}</div>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </li>
-            ))}
-        </ul>
+        <div>
+            {previousGuesses.length > 0 && 
+            <ul className="pt-4 guess-grid flex flex-col gap-4">
+                {previousGuesses.map((guess, index) => (
+                    <li key={index}>
+                        <ul className="flex flex-row gap-4">
+                            {guess.map((note, indexn) => (
+                                <li key={indexn}>
+                                    <Cell note={note} position={indexn} solution={solution} isRevealed={true} />
+                                </li>
+                            ))}
+                        </ul>
+                    </li>
+                ))}
+            </ul>
+}
+            {previousGuesses.length < 4 && 
+            <ul className="pt-4 pb-12 guess-grid flex flex-col gap-4">
+                {finalGuesses.map((guess, index) => (
+                    <li key={index}>
+                        <ul className="flex flex-row gap-4">
+                            {guess.map((note, indexn) => (
+                                <li key={indexn}>
+                                    <Cell note={note} position={indexn} solution={solution} isRevealed={false} />
+                                </li>
+                            ))}
+                        </ul>
+                    </li>
+                ))}
+            </ul>
+            }
+        </div>
     );
 }
