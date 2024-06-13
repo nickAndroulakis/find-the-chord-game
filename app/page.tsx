@@ -10,26 +10,41 @@ type Guess = string[];
 
 export default function Home() {
 
+  const notesAlphabet = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
   const { toast } = useToast()
-  const solution = ["C4", "E4", "G4", "C5"];
+  const solution = ["C", "E", "G", "C"];
   const [previousGuesses, setPreviousGuessses] = useState<Guess[]>([]);
   const [currentGuess, setCurrentGuess] = useState<Guess>([]);
+  const [octave, setOctave] = useState<number>(4);
 
   function handleClick(note: string) {
     if (currentGuess.length < 4) {
-      play(note);
       setCurrentGuess((prev) => [...prev, note]);
       console.log("CurrentGuess after click: " + currentGuess);
+      play(note);
     }
   }
 
   function play(note: string) {
+    let playOctave = octave;
+    console.log("Current Guess: " + currentGuess)
+    if (currentGuess.length > 0) {
+      console.log("Current Octave: " + octave)
+      console.log("Comparing notes: " + note + " and " + currentGuess[currentGuess.length - 1])
+      if (notesAlphabet.indexOf(note) <= notesAlphabet.indexOf(currentGuess[currentGuess.length - 1])) {
+        playOctave++
+        console.log("Incrementing octave to: " + playOctave);
+        setOctave(playOctave);
+      }
+
+    }
+
     const synth = new Tone.Synth().toDestination();
 
     Tone.loaded().then(() => {
-      synth.triggerAttackRelease(`${note}`, 1);
+      synth.triggerAttackRelease(note+playOctave, 1);
     });
-    console.log("Playing note: " + note);
+    console.log("Playing note: " + note+playOctave);
   }
 
   function handleCheck() {
@@ -38,7 +53,7 @@ export default function Home() {
       //Check if guess is correct
       console.log("Checking guess: " + currentGuess);
       console.log("Solution: " + solution);
-      if (currentGuess == solution) {
+      if (JSON.stringify(currentGuess) == JSON.stringify(solution)) {
         console.log("Correct!");
         toast({
           description: "Your guess was correct! You win",
@@ -52,6 +67,14 @@ export default function Home() {
       }
       setPreviousGuessses((prev) => [...prev, currentGuess]);
       setCurrentGuess([]);
+      setOctave(4);
+      if (previousGuesses.length == 4) {
+        //END GAME
+        console.log("Game Over");
+        toast({
+          description: "Game Over. You lose.",
+        });
+      }
     }
     else {
       console.log("Guess is not complete");
@@ -60,6 +83,10 @@ export default function Home() {
 
   function handleDelete() {
     if (currentGuess.length > 0) {
+      if (notesAlphabet.indexOf(currentGuess[currentGuess.length - 1]) <= notesAlphabet.indexOf(currentGuess[currentGuess.length - 2])) {
+        setOctave((prev) => prev - 1);
+      }
+
       setCurrentGuess((prev) => prev.slice(0, -1));
     }
   }

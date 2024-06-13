@@ -11,11 +11,11 @@ export function Grid({ previousGuesses, currentGuess }: GridProps) {
     const filledCurrentGuess = currentGuess.concat(Array(4 - currentGuess.length).fill(""));
 
     //Fill remaining rows with empty strings
-    const emptyRows = 4 - previousGuesses.length - 1;
+    const emptyRows = Math.max(4 - previousGuesses.length - 1, 0);
     const emptyGuesses = Array(emptyRows).fill(Array(4).fill("")) as Guess[];
 
     //Combine all guesses
-    const finalGuesses = previousGuesses.concat([filledCurrentGuess]).concat(emptyGuesses);
+    const finalGuesses = previousGuesses.length === 4 ? previousGuesses : previousGuesses.concat([filledCurrentGuess]).concat(emptyGuesses);
 
     return (
         <ul className="p-12 guess-grid flex flex-col gap-4">

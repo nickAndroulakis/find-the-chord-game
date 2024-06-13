@@ -13,18 +13,18 @@ export const Keyboard = ({ handleClick, handleCheck, handleDelete }: KeyboardPro
     return (
         <div>
             <div className="flex flex-row justify-center">
-                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("C4")}></div>
-                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Db4")}></div>
-                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("D4")}></div>
-                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Eb4")}></div>
-                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("E4")}></div>
-                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("F4")}></div>
-                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Gb4")}></div>
-                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("G4")}></div>
-                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Ab4")}></div>
-                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("A4")}></div>
-                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Bb4")}></div>
-                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("B4")}></div>
+                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("C")}></div>
+                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Db")}></div>
+                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("D")}></div>
+                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Eb")}></div>
+                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("E")}></div>
+                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("F")}></div>
+                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Gb")}></div>
+                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("G")}></div>
+                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Ab")}></div>
+                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("A")}></div>
+                <div className="w-[54px] h-[225px] bg-black -mx-[27px] z-10" onClick={() => handleClick("Bb")}></div>
+                <div className="border-2 border-black w-[90px] h-[360px] bg-white" onClick={() => handleClick("B")}></div>
             </div>
             <div className="flex items-center justify-center p-2 gap-2">
                 <Button
