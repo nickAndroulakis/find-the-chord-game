@@ -10,11 +10,7 @@ type CellProps = {
 export const Cell = ({ note, position, solution, isRevealed }: CellProps) => {
 
     let status = null;
-    console.log("Position: " + position);
-    console.log("Solution: " + solution);
     if (isRevealed) {
-        console.log("Note: " + note);
-        console.log("Solution: " + solution[position]);
         if (solution[position] === note)
             status = "correct";
         else if (solution.includes(note))

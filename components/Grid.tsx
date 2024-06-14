@@ -5,12 +5,11 @@ type Guess = string[];
 type GridProps = {
     previousGuesses: Guess[];
     currentGuess: Guess;
-    solution: Guess;
+    solution: string[];
 };
 
 export function Grid({ previousGuesses, currentGuess, solution }: GridProps) {
 
-    console.log("Previous Guesses: " + previousGuesses);
     //Fill current guess with empty strings
     const filledCurrentGuess = currentGuess.concat(Array(4 - currentGuess.length).fill(""));
 

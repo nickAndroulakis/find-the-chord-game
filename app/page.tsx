@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import * as Tone from "tone";
-import { Keyboard } from "./components/Keyboard";
-import { Grid } from "./components/Grid";
-import { useToast } from "@/components/ui/use-toast"
+import { Keyboard } from "../components/Keyboard";
+import { Grid } from "../components/Grid";
+import { useToast } from "@/components/ui/use-toast";
+import { solution } from "../lib/chords";
 
 type Guess = string[];
 
@@ -12,7 +13,6 @@ export default function Home() {
 
   const notesAlphabet = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
   const { toast } = useToast()
-  const solution = ["C", "E", "G", "C"];
   const [previousGuesses, setPreviousGuessses] = useState<Guess[]>([]);
   const [currentGuess, setCurrentGuess] = useState<Guess>([]);
   const [octave, setOctave] = useState<number>(4);
@@ -20,20 +20,15 @@ export default function Home() {
   function handleClick(note: string) {
     if (currentGuess.length < 4) {
       setCurrentGuess((prev) => [...prev, note]);
-      console.log("CurrentGuess after click: " + currentGuess);
       play(note);
     }
   }
 
   function play(note: string) {
     let playOctave = octave;
-    console.log("Current Guess: " + currentGuess)
     if (currentGuess.length > 0) {
-      console.log("Current Octave: " + octave)
-      console.log("Comparing notes: " + note + " and " + currentGuess[currentGuess.length - 1])
       if (notesAlphabet.indexOf(note) <= notesAlphabet.indexOf(currentGuess[currentGuess.length - 1])) {
         playOctave++
-        console.log("Incrementing octave to: " + playOctave);
         setOctave(playOctave);
       }
 
@@ -44,30 +39,24 @@ export default function Home() {
     Tone.loaded().then(() => {
       synth.triggerAttackRelease(note+playOctave, 1);
     });
-    console.log("Playing note: " + note+playOctave);
   }
 
   function handleCheck() {
     if (currentGuess.length == 4) {
       //Pause to animate reveal of guess
       //Check if guess is correct
-      console.log("Checking guess: " + currentGuess);
-      console.log("Solution: " + solution);
       if (JSON.stringify(currentGuess) == JSON.stringify(solution)) {
-        console.log("Correct!");
         toast({
           description: "Your guess was correct! You win",
         });
         //END GAME
       } else {
-        console.log("Incorrect");
         toast({
           description: "Your guess was wrong.",
         });
       }
       if (previousGuesses.length == 3) {
         //END GAME
-        console.log("Game Over");
         toast({
           description: "Game Over. You lose.",
         });
@@ -81,7 +70,9 @@ export default function Home() {
       }
     }
     else {
-      console.log("Guess is not complete");
+      toast({
+        description: "Guess is not complete.",
+      });
     }
   }
 
