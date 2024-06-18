@@ -14,16 +14,16 @@ export const Keyboard = ({ handleClick, handleCheck, handleDelete }: KeyboardPro
         <div>
             <div className="flex flex-row justify-center">
                 <div className="border-2 border-black w-[50px] h-[200px] bg-white" onClick={() => handleClick("C")}></div>
-                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("Db")}></div>
+                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("C#")}></div>
                 <div className="border-2 border-black w-[50px] h-[200px] bg-white" onClick={() => handleClick("D")}></div>
-                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("Eb")}></div>
+                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("D#")}></div>
                 <div className="border-2 border-black w-[50px] h-[200px] bg-white" onClick={() => handleClick("E")}></div>
                 <div className="border-2 border-black w-[50px] h-[200px] bg-white" onClick={() => handleClick("F")}></div>
-                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("Gb")}></div>
+                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("F#")}></div>
                 <div className="border-2 border-black w-[50px] h-[200px] bg-white" onClick={() => handleClick("G")}></div>
-                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("Ab")}></div>
+                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("G#")}></div>
                 <div className="border-2 border-black w-[50px] h-[200px] bg-white" onClick={() => handleClick("A")}></div>
-                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("Bb")}></div>
+                <div className="w-[30px] h-[125px] bg-black -mx-[15px] z-10" onClick={() => handleClick("A#")}></div>
                 <div className="border-2 border-black w-[50px] h-[200px] bg-white" onClick={() => handleClick("B")}></div>
             </div>
             <div className="flex items-center justify-center p-2 gap-2">

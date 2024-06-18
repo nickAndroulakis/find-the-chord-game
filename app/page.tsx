@@ -11,7 +11,7 @@ type Guess = string[];
 
 export default function Home() {
 
-  const notesAlphabet = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
+  const notesAlphabet = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
   const { toast } = useToast()
   const [previousGuesses, setPreviousGuessses] = useState<Guess[]>([]);
   const [currentGuess, setCurrentGuess] = useState<Guess>([]);
