@@ -39,6 +39,7 @@ export default function Home() {
     } else {
       if (currentGuessAdvanced.length < 4) {
         setCurrentGuessAdvanced((prev) => [...prev, note]);
+        play(note);
       }
     }
   }
