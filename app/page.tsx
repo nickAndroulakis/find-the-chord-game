@@ -85,7 +85,7 @@ export default function Home() {
             description: "Your guess was wrong.",
           });
         }
-        if (previousGuessesBeginner.length == 2) {
+        if (previousGuessesBeginner.length == 3) {
           //END GAME
           toast({
             description: "Game Over. You lose. Correct answer was " + solutionBeginner.join(" "),
